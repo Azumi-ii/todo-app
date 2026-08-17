@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<title>みんなのタスクボード</title>
+	<style>
+		body {
+			font-family: sans-serif;
+			margin: 40px;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+		}
+
+		.container {
+			width: 80%;
+			max-width: 800px;
+			border: 1px solid #ccc;
+			padding: 30px;
+			box-sizing: border-box;
+		}
+
+		h1 {
+			text-align: center;
+			font-size: 28px;
+			font-weight: bold;
+			margin-bottom: 30px;
+		}
+
+		table {
+			border-collapse: collapse;
+			width: 100%;
+			margin-bottom: 25px;
+		}
+
+		th,
+		td {
+			border: 1px solid #999;
+			padding: 12px;
+			text-align: center;
+		}
+
+		th {
+			background-color: #f2f2f2;
+		}
+
+		.btn-container {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+		}
+
+		.btn-left {
+			display: flex;
+			gap: 10px;
+		}
+
+		.btn {
+			padding: 10px 15px;
+			text-decoration: none;
+			color: #000;
+			background-color: #e0e0e0;
+			border: 1px solid #999;
+			border-radius: 4px;
+			font-size: 14px;
+			cursor: pointer;
+		}
+	</style>
+</head>
+
+<body>
+
+	<div class="container">
+		<!-- タイトル（大きい文字・太字） -->
+		<h1>みんなのタスクボード</h1>
+
+		<!-- タスク表 -->
+		<table>
+			<thead>
+				<tr>
+					<th>番号</th>
+					<th>ユーザー</th>
+					<th>期限</th>
+					<th>タスク内容</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="todo : ${todos}">
+					<td th:text="${todo.id}">1</td>
+					<td th:text="${todo.user}">ユーザー名</td>
+					<td th:text="${todo.deadline}">2026-08-17</td>
+					<!-- ★ ${todo.title} を ${todo.content} に変更 -->
+					<td th:text="${todo.content}">タスク内容</td>
+				</tr>
+			</tbody>
+		</table>
+
+		<!-- 下部ボタンエリア -->
+		<div class="btn-container">
+			<div class="btn-left">
+				<a th:href="@{/todos/today}" class="btn">今日のタスクのみ表示</a>
+				<a th:href="@{/todos/sort}" class="btn">期限が短い順でソート</a>
+			</div>
+			<a th:href="@{/todos/add}" class="btn">タスク追加</a>
+		</div>
+	</div>
+
+</body>
+
+</html>

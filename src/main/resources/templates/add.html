@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<title>新たなタスクを追加</title>
+	<style>
+		body {
+			font-family: sans-serif;
+			margin: 40px;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+		}
+
+		.container {
+			width: 80%;
+			max-width: 600px;
+			border: 1px solid #ccc;
+			padding: 30px;
+			box-sizing: border-box;
+		}
+
+		h1 {
+			text-align: center;
+			font-size: 28px;
+			font-weight: bold;
+			margin-bottom: 30px;
+		}
+
+		.form-group {
+			margin-bottom: 20px;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+		}
+
+		label {
+			margin-bottom: 5px;
+			font-weight: bold;
+		}
+
+		input[type="text"],
+		input[type="date"] {
+			width: 80%;
+			padding: 10px;
+			font-size: 16px;
+			border: 1px solid #999;
+			border-radius: 4px;
+			box-sizing: border-box;
+		}
+
+		.btn-container {
+			text-align: center;
+			margin-top: 30px;
+		}
+
+		.btn {
+			padding: 10px 25px;
+			font-size: 16px;
+			color: #000;
+			background-color: #e0e0e0;
+			border: 1px solid #999;
+			border-radius: 4px;
+			cursor: pointer;
+		}
+	</style>
+</head>
+
+<body>
+
+	<div class="container">
+		<!-- タイトル -->
+		<h1>新たなタスクを追加</h1>
+
+		<form th:action="@{/todos/add}" th:object="${todo}" method="post">
+			<!-- ユーザー入力 -->
+			<div class="form-group">
+				<label for="user">ユーザー</label>
+				<input type="text" id="user" th:field="*{user}" placeholder="ユーザー名" required>
+			</div>
+
+			<!-- 期限入力 -->
+			<div class="form-group">
+				<label for="deadline">期限</label>
+				<input type="date" id="deadline" th:field="*{deadline}" required>
+			</div>
+
+			<!-- タスク内容入力 -->
+			<div class="form-group">
+				<label for="content">タスク内容</label>
+				<!-- ★ th:field を title から content に変更 -->
+				<input type="text" id="content" th:field="*{content}" placeholder="タスク内容" required>
+			</div>
+
+			<!-- ボタン -->
+			<div class="btn-container">
+				<button type="submit" class="btn">タスク追加</button>
+			</div>
+		</form>
+	</div>
+
+</body>
+
+</html>
